@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package egp;
+
+option go_package = "github.com/go-to/egp-protobuf/pb";
+
+message Date {
+  int32 year = 1;
+  int32 month = 2;
+  int32 day = 3;
+}
+
+message Shop {
+  int64 ID = 1;
+  Event Event = 2;
+  Category Category = 3;
+  int32 No = 4;
+  string ShopName = 5;
+  string MenuName = 6;
+  string Phone = 7;
+  string Address = 8;
+  string BusinessDays = 9;
+  string RegularHoliday = 10;
+  string BusinessHours = 11;
+  string ChargePrice = 12;
+  int32 NormalizedChargePrice = 13;
+  string SinglePrice = 14;
+  int32 NormalizedSinglePrice = 15;
+  string SetPrice = 16;
+  int32 NormalizedSetPrice = 17;
+  string BeerType = 18;
+  string NeedsReservation = 19;
+  bool NormalizedNeedsReservation = 20;
+  string UseHachipay = 21;
+  bool NormalizedUseHachipay = 22;
+  bool IsOpenHoliday = 23;
+  bool IsIrregularHoliday = 24;
+}
+
+message Event {
+  int64 ID = 1;
+  string Name = 2;
+  int32 Year = 3;
+  Date StartDate = 4;
+  Date EndDate = 5;
+}
+
+message Category {
+  int64 ID = 1;
+  string Name = 2;
+}
+
+message ShopsRequest {}
+
+message ShopsResponse {
+  repeated Shop Shops = 1;
+}
+
+service EgpService {
+  rpc GetShops (ShopsRequest) returns (ShopsResponse);
+}
