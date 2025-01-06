@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package egp;
 
-option go_package = "github.com/go-to/egp-protobuf/pb";
+option go_package = "github.com/go-to/egp_protobuf/pb";
 
 message Date {
   int32 year = 1;
