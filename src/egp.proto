@@ -10,10 +10,36 @@ message Date {
   int32 day = 3;
 }
 
+message Event {
+  int64 ID = 1;
+  string Name = 2;
+  int32 Year = 3;
+  Date StartDate = 4;
+  Date EndDate = 5;
+}
+
+message Category {
+  int64 ID = 1;
+  string Name = 2;
+}
+
+message Categories {
+  repeated Category Categories = 1;
+}
+
+message BeerType {
+  int64 ID = 1;
+  string Name = 2;
+}
+
+message BeerTypes {
+  repeated BeerType BeerTypes = 1;
+}
+
 message Shop {
   int64 ID = 1;
-  Event Event = 2;
-  Category Category = 3;
+  int64 EventID = 2;
+  int64 CategoryID = 3;
   int32 No = 4;
   string ShopName = 5;
   string MenuName = 6;
@@ -35,19 +61,33 @@ message Shop {
   bool NormalizedUseHachipay = 22;
   bool IsOpenHoliday = 23;
   bool IsIrregularHoliday = 24;
+  double Latitude = 25;
+  double Longitude = 26;
+  string Location = 27;
+  int32 WeekNumber = 28;
+  int32 DayOfWeek = 29;
+  string StartTime = 30;
+  string EndTime = 31;
+  bool IsHoliday = 32;
+  BeerTypes BeerTypes = 33;
 }
 
-message Event {
+message ShopLocation {
   int64 ID = 1;
-  string Name = 2;
-  int32 Year = 3;
-  Date StartDate = 4;
-  Date EndDate = 5;
+  int64 ShopID = 2;
+  double Latitude = 3;
+  double Longitude = 4;
+  string Location = 5;
 }
 
-message Category {
+message ShopTime {
   int64 ID = 1;
-  string Name = 2;
+  int64 ShopID = 2;
+  int32 WeekNumber = 3;
+  int32 DayOfWeek = 4;
+  string StartTime = 5;
+  string EndTime = 6;
+  bool IsHoliday = 7;
 }
 
 message ShopsRequest {}
