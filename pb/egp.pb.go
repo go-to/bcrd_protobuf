@@ -349,47 +349,42 @@ func (x *BeerTypes) GetBeerTypes() []*BeerType {
 }
 
 type Shop struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	ID    int64                  `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	// Event Event = 2;
-	// Category Category = 3;
-	EventID                    int64  `protobuf:"varint,2,opt,name=EventID,proto3" json:"EventID,omitempty"`
-	CategoryID                 int64  `protobuf:"varint,3,opt,name=CategoryID,proto3" json:"CategoryID,omitempty"`
-	No                         int32  `protobuf:"varint,4,opt,name=No,proto3" json:"No,omitempty"`
-	ShopName                   string `protobuf:"bytes,5,opt,name=ShopName,proto3" json:"ShopName,omitempty"`
-	MenuName                   string `protobuf:"bytes,6,opt,name=MenuName,proto3" json:"MenuName,omitempty"`
-	Phone                      string `protobuf:"bytes,7,opt,name=Phone,proto3" json:"Phone,omitempty"`
-	Address                    string `protobuf:"bytes,8,opt,name=Address,proto3" json:"Address,omitempty"`
-	BusinessDays               string `protobuf:"bytes,9,opt,name=BusinessDays,proto3" json:"BusinessDays,omitempty"`
-	RegularHoliday             string `protobuf:"bytes,10,opt,name=RegularHoliday,proto3" json:"RegularHoliday,omitempty"`
-	BusinessHours              string `protobuf:"bytes,11,opt,name=BusinessHours,proto3" json:"BusinessHours,omitempty"`
-	ChargePrice                string `protobuf:"bytes,12,opt,name=ChargePrice,proto3" json:"ChargePrice,omitempty"`
-	NormalizedChargePrice      int32  `protobuf:"varint,13,opt,name=NormalizedChargePrice,proto3" json:"NormalizedChargePrice,omitempty"`
-	SinglePrice                string `protobuf:"bytes,14,opt,name=SinglePrice,proto3" json:"SinglePrice,omitempty"`
-	NormalizedSinglePrice      int32  `protobuf:"varint,15,opt,name=NormalizedSinglePrice,proto3" json:"NormalizedSinglePrice,omitempty"`
-	SetPrice                   string `protobuf:"bytes,16,opt,name=SetPrice,proto3" json:"SetPrice,omitempty"`
-	NormalizedSetPrice         int32  `protobuf:"varint,17,opt,name=NormalizedSetPrice,proto3" json:"NormalizedSetPrice,omitempty"`
-	BeerType                   string `protobuf:"bytes,18,opt,name=BeerType,proto3" json:"BeerType,omitempty"`
-	NeedsReservation           string `protobuf:"bytes,19,opt,name=NeedsReservation,proto3" json:"NeedsReservation,omitempty"`
-	NormalizedNeedsReservation bool   `protobuf:"varint,20,opt,name=NormalizedNeedsReservation,proto3" json:"NormalizedNeedsReservation,omitempty"`
-	UseHachipay                string `protobuf:"bytes,21,opt,name=UseHachipay,proto3" json:"UseHachipay,omitempty"`
-	NormalizedUseHachipay      bool   `protobuf:"varint,22,opt,name=NormalizedUseHachipay,proto3" json:"NormalizedUseHachipay,omitempty"`
-	IsOpenHoliday              bool   `protobuf:"varint,23,opt,name=IsOpenHoliday,proto3" json:"IsOpenHoliday,omitempty"`
-	IsIrregularHoliday         bool   `protobuf:"varint,24,opt,name=IsIrregularHoliday,proto3" json:"IsIrregularHoliday,omitempty"`
-	// ShopLocation Location = 25;
-	Latitude  float64 `protobuf:"fixed64,25,opt,name=Latitude,proto3" json:"Latitude,omitempty"`
-	Longitude float64 `protobuf:"fixed64,26,opt,name=Longitude,proto3" json:"Longitude,omitempty"`
-	Location  string  `protobuf:"bytes,27,opt,name=Location,proto3" json:"Location,omitempty"`
-	// ShopTime Time = 26;
-	WeekNumber int32  `protobuf:"varint,28,opt,name=WeekNumber,proto3" json:"WeekNumber,omitempty"`
-	DayOfWeek  int32  `protobuf:"varint,29,opt,name=DayOfWeek,proto3" json:"DayOfWeek,omitempty"`
-	StartTime  string `protobuf:"bytes,30,opt,name=StartTime,proto3" json:"StartTime,omitempty"`
-	EndTime    string `protobuf:"bytes,31,opt,name=EndTime,proto3" json:"EndTime,omitempty"`
-	IsHoliday  bool   `protobuf:"varint,32,opt,name=IsHoliday,proto3" json:"IsHoliday,omitempty"`
-	// BeerTypes BeerTypes = 27;
-	BeerTypes     *BeerTypes `protobuf:"bytes,33,opt,name=BeerTypes,proto3" json:"BeerTypes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"open.v1"`
+	ID                         int64                  `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
+	EventID                    int64                  `protobuf:"varint,2,opt,name=EventID,proto3" json:"EventID,omitempty"`
+	CategoryID                 int64                  `protobuf:"varint,3,opt,name=CategoryID,proto3" json:"CategoryID,omitempty"`
+	No                         int32                  `protobuf:"varint,4,opt,name=No,proto3" json:"No,omitempty"`
+	ShopName                   string                 `protobuf:"bytes,5,opt,name=ShopName,proto3" json:"ShopName,omitempty"`
+	MenuName                   string                 `protobuf:"bytes,6,opt,name=MenuName,proto3" json:"MenuName,omitempty"`
+	Phone                      string                 `protobuf:"bytes,7,opt,name=Phone,proto3" json:"Phone,omitempty"`
+	Address                    string                 `protobuf:"bytes,8,opt,name=Address,proto3" json:"Address,omitempty"`
+	BusinessDays               string                 `protobuf:"bytes,9,opt,name=BusinessDays,proto3" json:"BusinessDays,omitempty"`
+	RegularHoliday             string                 `protobuf:"bytes,10,opt,name=RegularHoliday,proto3" json:"RegularHoliday,omitempty"`
+	BusinessHours              string                 `protobuf:"bytes,11,opt,name=BusinessHours,proto3" json:"BusinessHours,omitempty"`
+	ChargePrice                string                 `protobuf:"bytes,12,opt,name=ChargePrice,proto3" json:"ChargePrice,omitempty"`
+	NormalizedChargePrice      int32                  `protobuf:"varint,13,opt,name=NormalizedChargePrice,proto3" json:"NormalizedChargePrice,omitempty"`
+	SinglePrice                string                 `protobuf:"bytes,14,opt,name=SinglePrice,proto3" json:"SinglePrice,omitempty"`
+	NormalizedSinglePrice      int32                  `protobuf:"varint,15,opt,name=NormalizedSinglePrice,proto3" json:"NormalizedSinglePrice,omitempty"`
+	SetPrice                   string                 `protobuf:"bytes,16,opt,name=SetPrice,proto3" json:"SetPrice,omitempty"`
+	NormalizedSetPrice         int32                  `protobuf:"varint,17,opt,name=NormalizedSetPrice,proto3" json:"NormalizedSetPrice,omitempty"`
+	BeerType                   string                 `protobuf:"bytes,18,opt,name=BeerType,proto3" json:"BeerType,omitempty"`
+	NeedsReservation           string                 `protobuf:"bytes,19,opt,name=NeedsReservation,proto3" json:"NeedsReservation,omitempty"`
+	NormalizedNeedsReservation bool                   `protobuf:"varint,20,opt,name=NormalizedNeedsReservation,proto3" json:"NormalizedNeedsReservation,omitempty"`
+	UseHachipay                string                 `protobuf:"bytes,21,opt,name=UseHachipay,proto3" json:"UseHachipay,omitempty"`
+	NormalizedUseHachipay      bool                   `protobuf:"varint,22,opt,name=NormalizedUseHachipay,proto3" json:"NormalizedUseHachipay,omitempty"`
+	IsOpenHoliday              bool                   `protobuf:"varint,23,opt,name=IsOpenHoliday,proto3" json:"IsOpenHoliday,omitempty"`
+	IsIrregularHoliday         bool                   `protobuf:"varint,24,opt,name=IsIrregularHoliday,proto3" json:"IsIrregularHoliday,omitempty"`
+	Latitude                   float64                `protobuf:"fixed64,25,opt,name=Latitude,proto3" json:"Latitude,omitempty"`
+	Longitude                  float64                `protobuf:"fixed64,26,opt,name=Longitude,proto3" json:"Longitude,omitempty"`
+	Location                   string                 `protobuf:"bytes,27,opt,name=Location,proto3" json:"Location,omitempty"`
+	WeekNumber                 int32                  `protobuf:"varint,28,opt,name=WeekNumber,proto3" json:"WeekNumber,omitempty"`
+	DayOfWeek                  int32                  `protobuf:"varint,29,opt,name=DayOfWeek,proto3" json:"DayOfWeek,omitempty"`
+	StartTime                  string                 `protobuf:"bytes,30,opt,name=StartTime,proto3" json:"StartTime,omitempty"`
+	EndTime                    string                 `protobuf:"bytes,31,opt,name=EndTime,proto3" json:"EndTime,omitempty"`
+	IsHoliday                  bool                   `protobuf:"varint,32,opt,name=IsHoliday,proto3" json:"IsHoliday,omitempty"`
+	BeerTypes                  *BeerTypes             `protobuf:"bytes,33,opt,name=BeerTypes,proto3" json:"BeerTypes,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *Shop) Reset() {
