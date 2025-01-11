@@ -69,7 +69,8 @@ message Shop {
   string StartTime = 30;
   string EndTime = 31;
   bool IsHoliday = 32;
-  BeerTypes BeerTypes = 33;
+  bool InCurrentSales = 33;
+  BeerTypes BeerTypes = 34;
 }
 
 message ShopLocation {
