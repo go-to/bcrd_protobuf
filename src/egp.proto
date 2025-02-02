@@ -4,6 +4,15 @@ package egp;
 
 option go_package = "github.com/go-to/egp_protobuf/pb";
 
+enum CategoryType {
+  CATEGORY_TYPE_NONE = 0;
+  CATEGORY_TYPE_EBISU_1 = 1;
+  CATEGORY_TYPE_EBISU_2 = 2;
+  CATEGORY_TYPE_EBISU_WEST = 3;
+  CATEGORY_TYPE_EBISU_SOUTH = 4;
+  CATEGORY_TYPE_BEER_COCKTAIL = 5;
+}
+
 enum SearchType {
   SEARCH_TYPE_IN_CURRENT_SALES = 0;
   SEARCH_TYPE_NOT_YET = 1;
@@ -47,7 +56,9 @@ message BeerTypes {
 message Shop {
   int64 ID = 1;
   int64 EventID = 2;
-  int64 CategoryID = 3;
+  int32 Year = 34;
+  CategoryType CategoryID = 3;
+  string CategoryName = 35;
   int32 No = 4;
   string ShopName = 5;
   string MenuName = 6;
@@ -71,14 +82,13 @@ message Shop {
   bool IsIrregularHoliday = 24;
   double Latitude = 25;
   double Longitude = 26;
-  string Location = 27;
+  string Distance = 27;
   int32 WeekNumber = 28;
   int32 DayOfWeek = 29;
   string StartTime = 30;
   string EndTime = 31;
   bool IsHoliday = 32;
   bool InCurrentSales = 33;
-  BeerTypes BeerTypes = 34;
 }
 
 message ShopLocation {
