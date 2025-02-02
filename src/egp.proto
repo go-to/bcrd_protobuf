@@ -4,6 +4,14 @@ package egp;
 
 option go_package = "github.com/go-to/egp_protobuf/pb";
 
+enum SearchType {
+  SEARCH_TYPE_IN_CURRENT_SALES = 0;
+  SEARCH_TYPE_NOT_YET = 1;
+  SEARCH_TYPE_IRREGULAR_HOLIDAY = 2;
+  SEARCH_TYPE_NEEDS_RESERVATION = 3;
+  SEARCH_TYPE_BEER_COCKTAIL = 4;
+}
+
 message Date {
   int32 year = 1;
   int32 month = 2;
@@ -91,7 +99,9 @@ message ShopTime {
   bool IsHoliday = 7;
 }
 
-message ShopsRequest {}
+message ShopsRequest {
+  repeated SearchType SearchTypes = 1;
+}
 
 message ShopsResponse {
   repeated Shop Shops = 1;
