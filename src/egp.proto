@@ -62,6 +62,7 @@ message Shop {
   int32 No = 4;
   string ShopName = 5;
   string MenuName = 6;
+  string MenuImageUrl = 36;
   string Phone = 7;
   string Address = 8;
   string BusinessDays = 9;
