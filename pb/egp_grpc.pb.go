@@ -20,13 +20,17 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	EgpService_GetShops_FullMethodName = "/egp.EgpService/GetShops"
+	EgpService_AddStamp_FullMethodName = "/egp.EgpService/AddStamp"
 )
 
 // EgpServiceClient is the client API for EgpService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EgpServiceClient interface {
+	// 店舗情報取得
 	GetShops(ctx context.Context, in *ShopsRequest, opts ...grpc.CallOption) (*ShopsResponse, error)
+	// スタンプ追加
+	AddStamp(ctx context.Context, in *AddStampRequest, opts ...grpc.CallOption) (*AddStampResponse, error)
 }
 
 type egpServiceClient struct {
@@ -47,11 +51,24 @@ func (c *egpServiceClient) GetShops(ctx context.Context, in *ShopsRequest, opts 
 	return out, nil
 }
 
+func (c *egpServiceClient) AddStamp(ctx context.Context, in *AddStampRequest, opts ...grpc.CallOption) (*AddStampResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddStampResponse)
+	err := c.cc.Invoke(ctx, EgpService_AddStamp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EgpServiceServer is the server API for EgpService service.
 // All implementations must embed UnimplementedEgpServiceServer
 // for forward compatibility.
 type EgpServiceServer interface {
+	// 店舗情報取得
 	GetShops(context.Context, *ShopsRequest) (*ShopsResponse, error)
+	// スタンプ追加
+	AddStamp(context.Context, *AddStampRequest) (*AddStampResponse, error)
 	mustEmbedUnimplementedEgpServiceServer()
 }
 
@@ -64,6 +81,9 @@ type UnimplementedEgpServiceServer struct{}
 
 func (UnimplementedEgpServiceServer) GetShops(context.Context, *ShopsRequest) (*ShopsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetShops not implemented")
+}
+func (UnimplementedEgpServiceServer) AddStamp(context.Context, *AddStampRequest) (*AddStampResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddStamp not implemented")
 }
 func (UnimplementedEgpServiceServer) mustEmbedUnimplementedEgpServiceServer() {}
 func (UnimplementedEgpServiceServer) testEmbeddedByValue()                    {}
@@ -104,6 +124,24 @@ func _EgpService_GetShops_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EgpService_AddStamp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddStampRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EgpServiceServer).AddStamp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EgpService_AddStamp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EgpServiceServer).AddStamp(ctx, req.(*AddStampRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EgpService_ServiceDesc is the grpc.ServiceDesc for EgpService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +152,10 @@ var EgpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetShops",
 			Handler:    _EgpService_GetShops_Handler,
+		},
+		{
+			MethodName: "AddStamp",
+			Handler:    _EgpService_AddStamp_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
