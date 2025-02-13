@@ -90,6 +90,8 @@ message Shop {
   string EndTime = 31;
   bool IsHoliday = 32;
   bool InCurrentSales = 33;
+  bool IsStamped = 37;
+  int32 NumberOfTimes = 38;
 }
 
 message ShopLocation {
@@ -112,6 +114,7 @@ message ShopTime {
 
 message ShopsRequest {
   repeated SearchType SearchTypes = 1;
+  string UserId = 2;
 }
 
 message ShopsResponse {
