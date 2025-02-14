@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EgpService_GetShops_FullMethodName = "/egp.EgpService/GetShops"
-	EgpService_AddStamp_FullMethodName = "/egp.EgpService/AddStamp"
+	EgpService_GetShops_FullMethodName    = "/egp.EgpService/GetShops"
+	EgpService_AddStamp_FullMethodName    = "/egp.EgpService/AddStamp"
+	EgpService_DeleteStamp_FullMethodName = "/egp.EgpService/DeleteStamp"
 )
 
 // EgpServiceClient is the client API for EgpService service.
@@ -31,6 +32,8 @@ type EgpServiceClient interface {
 	GetShops(ctx context.Context, in *ShopsRequest, opts ...grpc.CallOption) (*ShopsResponse, error)
 	// スタンプ追加
 	AddStamp(ctx context.Context, in *AddStampRequest, opts ...grpc.CallOption) (*AddStampResponse, error)
+	// スタンプ削除
+	DeleteStamp(ctx context.Context, in *DeleteStampRequest, opts ...grpc.CallOption) (*DeleteStampResponse, error)
 }
 
 type egpServiceClient struct {
@@ -61,6 +64,16 @@ func (c *egpServiceClient) AddStamp(ctx context.Context, in *AddStampRequest, op
 	return out, nil
 }
 
+func (c *egpServiceClient) DeleteStamp(ctx context.Context, in *DeleteStampRequest, opts ...grpc.CallOption) (*DeleteStampResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteStampResponse)
+	err := c.cc.Invoke(ctx, EgpService_DeleteStamp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EgpServiceServer is the server API for EgpService service.
 // All implementations must embed UnimplementedEgpServiceServer
 // for forward compatibility.
@@ -69,6 +82,8 @@ type EgpServiceServer interface {
 	GetShops(context.Context, *ShopsRequest) (*ShopsResponse, error)
 	// スタンプ追加
 	AddStamp(context.Context, *AddStampRequest) (*AddStampResponse, error)
+	// スタンプ削除
+	DeleteStamp(context.Context, *DeleteStampRequest) (*DeleteStampResponse, error)
 	mustEmbedUnimplementedEgpServiceServer()
 }
 
@@ -84,6 +99,9 @@ func (UnimplementedEgpServiceServer) GetShops(context.Context, *ShopsRequest) (*
 }
 func (UnimplementedEgpServiceServer) AddStamp(context.Context, *AddStampRequest) (*AddStampResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddStamp not implemented")
+}
+func (UnimplementedEgpServiceServer) DeleteStamp(context.Context, *DeleteStampRequest) (*DeleteStampResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteStamp not implemented")
 }
 func (UnimplementedEgpServiceServer) mustEmbedUnimplementedEgpServiceServer() {}
 func (UnimplementedEgpServiceServer) testEmbeddedByValue()                    {}
@@ -142,6 +160,24 @@ func _EgpService_AddStamp_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EgpService_DeleteStamp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteStampRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EgpServiceServer).DeleteStamp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EgpService_DeleteStamp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EgpServiceServer).DeleteStamp(ctx, req.(*DeleteStampRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EgpService_ServiceDesc is the grpc.ServiceDesc for EgpService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -156,6 +192,10 @@ var EgpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddStamp",
 			Handler:    _EgpService_AddStamp_Handler,
+		},
+		{
+			MethodName: "DeleteStamp",
+			Handler:    _EgpService_DeleteStamp_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -130,9 +130,20 @@ message AddStampResponse {
   int32 NumberOfTimes = 1;
 }
 
+message DeleteStampRequest {
+  string UserId = 1;
+  int64 ShopId = 2;
+}
+
+message DeleteStampResponse {
+  int32 NumberOfTimes = 1;
+}
+
 service EgpService {
   // 店舗情報取得
   rpc GetShops (ShopsRequest) returns (ShopsResponse);
   // スタンプ追加
   rpc AddStamp (AddStampRequest) returns (AddStampResponse);
+  // スタンプ削除
+  rpc DeleteStamp (DeleteStampRequest) returns (DeleteStampResponse);
 }
