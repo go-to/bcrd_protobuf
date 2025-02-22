@@ -121,21 +121,12 @@ message ShopsResponse {
   repeated Shop Shops = 1;
 }
 
-message AddStampRequest {
+message StampRequest {
   string UserId = 1;
   int64 ShopId = 2;
 }
 
-message AddStampResponse {
-  int32 NumberOfTimes = 1;
-}
-
-message DeleteStampRequest {
-  string UserId = 1;
-  int64 ShopId = 2;
-}
-
-message DeleteStampResponse {
+message StampResponse {
   int32 NumberOfTimes = 1;
 }
 
@@ -143,7 +134,7 @@ service EgpService {
   // 店舗情報取得
   rpc GetShops (ShopsRequest) returns (ShopsResponse);
   // スタンプ追加
-  rpc AddStamp (AddStampRequest) returns (AddStampResponse);
+  rpc AddStamp (StampRequest) returns (StampResponse);
   // スタンプ削除
-  rpc DeleteStamp (DeleteStampRequest) returns (DeleteStampResponse);
+  rpc DeleteStamp (StampRequest) returns (StampResponse);
 }

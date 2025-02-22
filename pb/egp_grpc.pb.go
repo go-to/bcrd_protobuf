@@ -31,9 +31,9 @@ type EgpServiceClient interface {
 	// 店舗情報取得
 	GetShops(ctx context.Context, in *ShopsRequest, opts ...grpc.CallOption) (*ShopsResponse, error)
 	// スタンプ追加
-	AddStamp(ctx context.Context, in *AddStampRequest, opts ...grpc.CallOption) (*AddStampResponse, error)
+	AddStamp(ctx context.Context, in *StampRequest, opts ...grpc.CallOption) (*StampResponse, error)
 	// スタンプ削除
-	DeleteStamp(ctx context.Context, in *DeleteStampRequest, opts ...grpc.CallOption) (*DeleteStampResponse, error)
+	DeleteStamp(ctx context.Context, in *StampRequest, opts ...grpc.CallOption) (*StampResponse, error)
 }
 
 type egpServiceClient struct {
@@ -54,9 +54,9 @@ func (c *egpServiceClient) GetShops(ctx context.Context, in *ShopsRequest, opts 
 	return out, nil
 }
 
-func (c *egpServiceClient) AddStamp(ctx context.Context, in *AddStampRequest, opts ...grpc.CallOption) (*AddStampResponse, error) {
+func (c *egpServiceClient) AddStamp(ctx context.Context, in *StampRequest, opts ...grpc.CallOption) (*StampResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddStampResponse)
+	out := new(StampResponse)
 	err := c.cc.Invoke(ctx, EgpService_AddStamp_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -64,9 +64,9 @@ func (c *egpServiceClient) AddStamp(ctx context.Context, in *AddStampRequest, op
 	return out, nil
 }
 
-func (c *egpServiceClient) DeleteStamp(ctx context.Context, in *DeleteStampRequest, opts ...grpc.CallOption) (*DeleteStampResponse, error) {
+func (c *egpServiceClient) DeleteStamp(ctx context.Context, in *StampRequest, opts ...grpc.CallOption) (*StampResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteStampResponse)
+	out := new(StampResponse)
 	err := c.cc.Invoke(ctx, EgpService_DeleteStamp_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -81,9 +81,9 @@ type EgpServiceServer interface {
 	// 店舗情報取得
 	GetShops(context.Context, *ShopsRequest) (*ShopsResponse, error)
 	// スタンプ追加
-	AddStamp(context.Context, *AddStampRequest) (*AddStampResponse, error)
+	AddStamp(context.Context, *StampRequest) (*StampResponse, error)
 	// スタンプ削除
-	DeleteStamp(context.Context, *DeleteStampRequest) (*DeleteStampResponse, error)
+	DeleteStamp(context.Context, *StampRequest) (*StampResponse, error)
 	mustEmbedUnimplementedEgpServiceServer()
 }
 
@@ -97,10 +97,10 @@ type UnimplementedEgpServiceServer struct{}
 func (UnimplementedEgpServiceServer) GetShops(context.Context, *ShopsRequest) (*ShopsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetShops not implemented")
 }
-func (UnimplementedEgpServiceServer) AddStamp(context.Context, *AddStampRequest) (*AddStampResponse, error) {
+func (UnimplementedEgpServiceServer) AddStamp(context.Context, *StampRequest) (*StampResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddStamp not implemented")
 }
-func (UnimplementedEgpServiceServer) DeleteStamp(context.Context, *DeleteStampRequest) (*DeleteStampResponse, error) {
+func (UnimplementedEgpServiceServer) DeleteStamp(context.Context, *StampRequest) (*StampResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteStamp not implemented")
 }
 func (UnimplementedEgpServiceServer) mustEmbedUnimplementedEgpServiceServer() {}
@@ -143,7 +143,7 @@ func _EgpService_GetShops_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _EgpService_AddStamp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddStampRequest)
+	in := new(StampRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -155,13 +155,13 @@ func _EgpService_AddStamp_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: EgpService_AddStamp_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EgpServiceServer).AddStamp(ctx, req.(*AddStampRequest))
+		return srv.(EgpServiceServer).AddStamp(ctx, req.(*StampRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _EgpService_DeleteStamp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteStampRequest)
+	in := new(StampRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -173,7 +173,7 @@ func _EgpService_DeleteStamp_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: EgpService_DeleteStamp_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EgpServiceServer).DeleteStamp(ctx, req.(*DeleteStampRequest))
+		return srv.(EgpServiceServer).DeleteStamp(ctx, req.(*StampRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
