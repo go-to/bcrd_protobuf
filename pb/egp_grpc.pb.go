@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	EgpService_GetShops_FullMethodName    = "/egp.EgpService/GetShops"
+	EgpService_GetShop_FullMethodName     = "/egp.EgpService/GetShop"
 	EgpService_AddStamp_FullMethodName    = "/egp.EgpService/AddStamp"
 	EgpService_DeleteStamp_FullMethodName = "/egp.EgpService/DeleteStamp"
 )
@@ -30,6 +31,8 @@ const (
 type EgpServiceClient interface {
 	// 店舗情報取得
 	GetShops(ctx context.Context, in *ShopsRequest, opts ...grpc.CallOption) (*ShopsResponse, error)
+	// 店舗情報取得
+	GetShop(ctx context.Context, in *ShopRequest, opts ...grpc.CallOption) (*ShopResponse, error)
 	// スタンプ追加
 	AddStamp(ctx context.Context, in *StampRequest, opts ...grpc.CallOption) (*StampResponse, error)
 	// スタンプ削除
@@ -48,6 +51,16 @@ func (c *egpServiceClient) GetShops(ctx context.Context, in *ShopsRequest, opts 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ShopsResponse)
 	err := c.cc.Invoke(ctx, EgpService_GetShops_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *egpServiceClient) GetShop(ctx context.Context, in *ShopRequest, opts ...grpc.CallOption) (*ShopResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShopResponse)
+	err := c.cc.Invoke(ctx, EgpService_GetShop_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,6 +93,8 @@ func (c *egpServiceClient) DeleteStamp(ctx context.Context, in *StampRequest, op
 type EgpServiceServer interface {
 	// 店舗情報取得
 	GetShops(context.Context, *ShopsRequest) (*ShopsResponse, error)
+	// 店舗情報取得
+	GetShop(context.Context, *ShopRequest) (*ShopResponse, error)
 	// スタンプ追加
 	AddStamp(context.Context, *StampRequest) (*StampResponse, error)
 	// スタンプ削除
@@ -96,6 +111,9 @@ type UnimplementedEgpServiceServer struct{}
 
 func (UnimplementedEgpServiceServer) GetShops(context.Context, *ShopsRequest) (*ShopsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetShops not implemented")
+}
+func (UnimplementedEgpServiceServer) GetShop(context.Context, *ShopRequest) (*ShopResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetShop not implemented")
 }
 func (UnimplementedEgpServiceServer) AddStamp(context.Context, *StampRequest) (*StampResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddStamp not implemented")
@@ -138,6 +156,24 @@ func _EgpService_GetShops_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EgpServiceServer).GetShops(ctx, req.(*ShopsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EgpService_GetShop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShopRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EgpServiceServer).GetShop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EgpService_GetShop_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EgpServiceServer).GetShop(ctx, req.(*ShopRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -188,6 +224,10 @@ var EgpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetShops",
 			Handler:    _EgpService_GetShops_Handler,
+		},
+		{
+			MethodName: "GetShop",
+			Handler:    _EgpService_GetShop_Handler,
 		},
 		{
 			MethodName: "AddStamp",

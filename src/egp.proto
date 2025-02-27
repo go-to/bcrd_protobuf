@@ -121,6 +121,15 @@ message ShopsResponse {
   repeated Shop Shops = 1;
 }
 
+message ShopRequest {
+  string UserId = 1;
+  int64 ShopId = 2;
+}
+
+message ShopResponse {
+  Shop Shop = 1;
+}
+
 message StampRequest {
   string UserId = 1;
   int64 ShopId = 2;
@@ -133,6 +142,8 @@ message StampResponse {
 service EgpService {
   // 店舗情報取得
   rpc GetShops (ShopsRequest) returns (ShopsResponse);
+  // 店舗情報取得
+  rpc GetShop (ShopRequest) returns (ShopResponse);
   // スタンプ追加
   rpc AddStamp (StampRequest) returns (StampResponse);
   // スタンプ削除
