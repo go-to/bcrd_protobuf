@@ -115,6 +115,7 @@ message ShopTime {
 message ShopsRequest {
   repeated SearchType SearchTypes = 1;
   string UserId = 2;
+  string Keyword = 3;
 }
 
 message ShopsResponse {
