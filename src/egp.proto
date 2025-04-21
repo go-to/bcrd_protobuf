@@ -112,10 +112,19 @@ message ShopTime {
   bool IsHoliday = 7;
 }
 
+message ShopsTotalRequest {
+  int32 Year = 1;
+}
+
+message ShopsTotalResponse {
+  int64 TotalNum = 1;
+}
+
 message ShopsRequest {
   repeated SearchType SearchTypes = 1;
   string UserId = 2;
   string Keyword = 3;
+  int32 Year = 4;
 }
 
 message ShopsResponse {
@@ -141,6 +150,8 @@ message StampResponse {
 }
 
 service EgpService {
+  // 店舗総数取得
+  rpc GetShopsTotal (ShopsTotalRequest) returns (ShopsTotalResponse);
   // 店舗情報取得
   rpc GetShops (ShopsRequest) returns (ShopsResponse);
   // 店舗情報取得
