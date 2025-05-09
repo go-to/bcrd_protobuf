@@ -28,125 +28,125 @@ message Date {
 }
 
 message Event {
-  int64 ID = 1;
-  string Name = 2;
-  int32 Year = 3;
-  Date StartDate = 4;
-  Date EndDate = 5;
+  int64 id = 1;
+  string name = 2;
+  int32 year = 3;
+  Date start_date = 4;
+  Date end_date = 5;
 }
 
 message Category {
-  int64 ID = 1;
-  string Name = 2;
+  int64 id = 1;
+  string name = 2;
 }
 
 message Categories {
-  repeated Category Categories = 1;
+  repeated Category categories = 1;
 }
 
 message BeerType {
-  int64 ID = 1;
-  string Name = 2;
+  int64 id = 1;
+  string name = 2;
 }
 
 message BeerTypes {
-  repeated BeerType BeerTypes = 1;
+  repeated BeerType beer_types = 1;
 }
 
 message Shop {
-  int64 ID = 1;
-  int64 EventID = 2;
-  int32 Year = 34;
-  CategoryType CategoryID = 3;
-  string CategoryName = 35;
-  int32 No = 4;
-  string ShopName = 5;
-  string MenuName = 6;
-  string MenuImageUrl = 36;
-  string Phone = 7;
-  string Address = 8;
-  string BusinessDays = 9;
-  string RegularHoliday = 10;
-  string BusinessHours = 11;
-  string ChargePrice = 12;
-  int32 NormalizedChargePrice = 13;
-  string SinglePrice = 14;
-  int32 NormalizedSinglePrice = 15;
-  string SetPrice = 16;
-  int32 NormalizedSetPrice = 17;
-  string BeerType = 18;
-  string NeedsReservation = 19;
-  bool NormalizedNeedsReservation = 20;
-  string UseHachipay = 21;
-  bool NormalizedUseHachipay = 22;
-  bool IsOpenHoliday = 23;
-  bool IsIrregularHoliday = 24;
-  double Latitude = 25;
-  double Longitude = 26;
-  string Distance = 27;
-  int32 WeekNumber = 28;
-  int32 DayOfWeek = 29;
-  string StartTime = 30;
-  string EndTime = 31;
-  bool IsHoliday = 32;
-  bool InCurrentSales = 33;
-  bool IsStamped = 37;
-  int32 NumberOfTimes = 38;
+  int64 id = 1;
+  int64 event_id = 2;
+  int32 year = 34;
+  CategoryType category_id = 3;
+  string category_name = 35;
+  int32 no = 4;
+  string shop_name = 5;
+  string menu_name = 6;
+  string menu_image_url = 36;
+  string phone = 7;
+  string address = 8;
+  string business_days = 9;
+  string regular_holiday = 10;
+  string business_hours = 11;
+  string charge_price = 12;
+  int32 normalized_charge_price = 13;
+  string single_price = 14;
+  int32 normalized_single_price = 15;
+  string set_price = 16;
+  int32 normalized_set_price = 17;
+  string beer_type = 18;
+  string needs_reservation = 19;
+  bool normalized_needs_reservation = 20;
+  string use_hachipay = 21;
+  bool normalized_use_hachipay = 22;
+  bool is_open_holiday = 23;
+  bool is_irregular_holiday = 24;
+  double latitude = 25;
+  double longitude = 26;
+  string distance = 27;
+  int32 week_number = 28;
+  int32 day_of_week = 29;
+  string start_time = 30;
+  string end_time = 31;
+  bool is_holiday = 32;
+  bool in_current_sales = 33;
+  bool is_stamped = 37;
+  int32 number_of_times = 38;
 }
 
 message ShopLocation {
-  int64 ID = 1;
-  int64 ShopID = 2;
-  double Latitude = 3;
-  double Longitude = 4;
-  string Location = 5;
+  int64 id = 1;
+  int64 shop_id = 2;
+  double latitude = 3;
+  double longitude = 4;
+  string location = 5;
 }
 
 message ShopTime {
-  int64 ID = 1;
-  int64 ShopID = 2;
-  int32 WeekNumber = 3;
-  int32 DayOfWeek = 4;
-  string StartTime = 5;
-  string EndTime = 6;
-  bool IsHoliday = 7;
+  int64 id = 1;
+  int64 shop_id = 2;
+  int32 week_number = 3;
+  int32 day_of_week = 4;
+  string start_time = 5;
+  string end_time = 6;
+  bool is_holiday = 7;
 }
 
 message ShopsTotalRequest {
-  int32 Year = 1;
+  int32 year = 1;
 }
 
 message ShopsTotalResponse {
-  int64 TotalNum = 1;
+  int64 total_num = 1;
 }
 
 message ShopsRequest {
-  repeated SearchType SearchTypes = 1;
-  string UserId = 2;
-  string Keyword = 3;
-  int32 Year = 4;
+  repeated SearchType search_types = 1;
+  string user_id = 2;
+  string keyword = 3;
+  int32 year = 4;
 }
 
 message ShopsResponse {
-  repeated Shop Shops = 1;
+  repeated Shop shops = 1;
 }
 
 message ShopRequest {
-  string UserId = 1;
-  int64 ShopId = 2;
+  string user_id = 1;
+  int64 shop_id = 2;
 }
 
 message ShopResponse {
-  Shop Shop = 1;
+  Shop shop = 1;
 }
 
 message StampRequest {
-  string UserId = 1;
-  int64 ShopId = 2;
+  string user_id = 1;
+  int64 shop_id = 2;
 }
 
 message StampResponse {
-  int32 NumberOfTimes = 1;
+  int32 number_of_times = 1;
 }
 
 service EgpService {
