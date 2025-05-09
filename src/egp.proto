@@ -21,6 +21,11 @@ enum SearchType {
   SEARCH_TYPE_BEER_COCKTAIL = 4;
 }
 
+enum SortOrderType {
+  SORT_ORDER_NO = 0;
+  SORT_ORDER_DISTANCE = 1;
+}
+
 message Date {
   int32 year = 1;
   int32 month = 2;
@@ -125,6 +130,9 @@ message ShopsRequest {
   string user_id = 2;
   string keyword = 3;
   int32 year = 4;
+  SortOrderType sort_order = 5;
+  double latitude = 6;
+  double longitude = 7;
 }
 
 message ShopsResponse {
