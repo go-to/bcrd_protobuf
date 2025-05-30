@@ -157,6 +157,15 @@ message StampResponse {
   int32 number_of_times = 1;
 }
 
+message MergeUserStampRequest {
+  string user_id = 1;
+  string anonymous_user_id = 2;
+}
+
+message MergeUserStampResponse {
+  int32 stamp_num = 1;
+}
+
 service EgpService {
   // 店舗総数取得
   rpc GetShopsTotal (ShopsTotalRequest) returns (ShopsTotalResponse);
@@ -168,4 +177,6 @@ service EgpService {
   rpc AddStamp (StampRequest) returns (StampResponse);
   // スタンプ削除
   rpc DeleteStamp (StampRequest) returns (StampResponse);
+  // ユーザーログイン
+  rpc MergeUserStamp (MergeUserStampRequest) returns (MergeUserStampResponse);
 }
