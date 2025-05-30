@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EgpService_GetShopsTotal_FullMethodName = "/egp.EgpService/GetShopsTotal"
-	EgpService_GetShops_FullMethodName      = "/egp.EgpService/GetShops"
-	EgpService_GetShop_FullMethodName       = "/egp.EgpService/GetShop"
-	EgpService_AddStamp_FullMethodName      = "/egp.EgpService/AddStamp"
-	EgpService_DeleteStamp_FullMethodName   = "/egp.EgpService/DeleteStamp"
+	EgpService_GetShopsTotal_FullMethodName  = "/egp.EgpService/GetShopsTotal"
+	EgpService_GetShops_FullMethodName       = "/egp.EgpService/GetShops"
+	EgpService_GetShop_FullMethodName        = "/egp.EgpService/GetShop"
+	EgpService_AddStamp_FullMethodName       = "/egp.EgpService/AddStamp"
+	EgpService_DeleteStamp_FullMethodName    = "/egp.EgpService/DeleteStamp"
+	EgpService_MergeUserStamp_FullMethodName = "/egp.EgpService/MergeUserStamp"
 )
 
 // EgpServiceClient is the client API for EgpService service.
@@ -40,6 +41,8 @@ type EgpServiceClient interface {
 	AddStamp(ctx context.Context, in *StampRequest, opts ...grpc.CallOption) (*StampResponse, error)
 	// スタンプ削除
 	DeleteStamp(ctx context.Context, in *StampRequest, opts ...grpc.CallOption) (*StampResponse, error)
+	// ユーザーログイン
+	MergeUserStamp(ctx context.Context, in *MergeUserStampRequest, opts ...grpc.CallOption) (*MergeUserStampResponse, error)
 }
 
 type egpServiceClient struct {
@@ -100,6 +103,16 @@ func (c *egpServiceClient) DeleteStamp(ctx context.Context, in *StampRequest, op
 	return out, nil
 }
 
+func (c *egpServiceClient) MergeUserStamp(ctx context.Context, in *MergeUserStampRequest, opts ...grpc.CallOption) (*MergeUserStampResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MergeUserStampResponse)
+	err := c.cc.Invoke(ctx, EgpService_MergeUserStamp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EgpServiceServer is the server API for EgpService service.
 // All implementations must embed UnimplementedEgpServiceServer
 // for forward compatibility.
@@ -114,6 +127,8 @@ type EgpServiceServer interface {
 	AddStamp(context.Context, *StampRequest) (*StampResponse, error)
 	// スタンプ削除
 	DeleteStamp(context.Context, *StampRequest) (*StampResponse, error)
+	// ユーザーログイン
+	MergeUserStamp(context.Context, *MergeUserStampRequest) (*MergeUserStampResponse, error)
 	mustEmbedUnimplementedEgpServiceServer()
 }
 
@@ -138,6 +153,9 @@ func (UnimplementedEgpServiceServer) AddStamp(context.Context, *StampRequest) (*
 }
 func (UnimplementedEgpServiceServer) DeleteStamp(context.Context, *StampRequest) (*StampResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteStamp not implemented")
+}
+func (UnimplementedEgpServiceServer) MergeUserStamp(context.Context, *MergeUserStampRequest) (*MergeUserStampResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MergeUserStamp not implemented")
 }
 func (UnimplementedEgpServiceServer) mustEmbedUnimplementedEgpServiceServer() {}
 func (UnimplementedEgpServiceServer) testEmbeddedByValue()                    {}
@@ -250,6 +268,24 @@ func _EgpService_DeleteStamp_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EgpService_MergeUserStamp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MergeUserStampRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EgpServiceServer).MergeUserStamp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EgpService_MergeUserStamp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EgpServiceServer).MergeUserStamp(ctx, req.(*MergeUserStampRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EgpService_ServiceDesc is the grpc.ServiceDesc for EgpService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -276,6 +312,10 @@ var EgpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteStamp",
 			Handler:    _EgpService_DeleteStamp_Handler,
+		},
+		{
+			MethodName: "MergeUserStamp",
+			Handler:    _EgpService_MergeUserStamp_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
