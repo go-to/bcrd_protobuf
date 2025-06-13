@@ -146,6 +146,7 @@ message ShopRequest {
 
 message ShopResponse {
   Shop shop = 1;
+  bool is_event_period = 2;
 }
 
 message StampRequest {
