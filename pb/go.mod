@@ -1,4 +1,4 @@
-module github.com/go-to/egp_protobuf/pb
+module github.com/go-to/bcrd_protobuf/pb
 
 go 1.23.3
 
