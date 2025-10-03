@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package egp;
+package bcrd;
 
-option go_package = "github.com/go-to/egp_protobuf/pb";
+option go_package = "github.com/go-to/bcrd_protobuf/pb";
 
 enum CategoryType {
   CATEGORY_TYPE_NONE = 0;
@@ -167,7 +167,7 @@ message MergeUserStampResponse {
   int32 stamp_num = 1;
 }
 
-service EgpService {
+service BcrdService {
   // 店舗総数取得
   rpc GetShopsTotal (ShopsTotalRequest) returns (ShopsTotalResponse);
   // 店舗情報取得
