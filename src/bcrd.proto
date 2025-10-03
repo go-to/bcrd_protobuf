@@ -4,21 +4,10 @@ package bcrd;
 
 option go_package = "github.com/go-to/bcrd_protobuf/pb";
 
-enum CategoryType {
-  CATEGORY_TYPE_NONE = 0;
-  CATEGORY_TYPE_EBISU_1 = 1;
-  CATEGORY_TYPE_EBISU_2 = 2;
-  CATEGORY_TYPE_EBISU_WEST = 3;
-  CATEGORY_TYPE_EBISU_SOUTH = 4;
-  CATEGORY_TYPE_BEER_COCKTAIL = 5;
-}
-
 enum SearchType {
   SEARCH_TYPE_IN_CURRENT_SALES = 0;
   SEARCH_TYPE_NOT_YET = 1;
   SEARCH_TYPE_IRREGULAR_HOLIDAY = 2;
-  SEARCH_TYPE_NEEDS_RESERVATION = 3;
-  SEARCH_TYPE_BEER_COCKTAIL = 4;
 }
 
 enum SortOrderType {
@@ -40,63 +29,33 @@ message Event {
   Date end_date = 5;
 }
 
-message Category {
-  int64 id = 1;
-  string name = 2;
-}
-
-message Categories {
-  repeated Category categories = 1;
-}
-
-message BeerType {
-  int64 id = 1;
-  string name = 2;
-}
-
-message BeerTypes {
-  repeated BeerType beer_types = 1;
-}
-
 message Shop {
   int64 id = 1;
   int64 event_id = 2;
-  int32 year = 34;
-  CategoryType category_id = 3;
-  string category_name = 35;
+  int32 year = 3;
   int32 no = 4;
   string shop_name = 5;
-  string menu_name = 6;
-  string menu_image_url = 36;
-  string phone = 7;
-  string address = 8;
-  string business_days = 9;
-  string regular_holiday = 10;
-  string business_hours = 11;
-  string charge_price = 12;
-  int32 normalized_charge_price = 13;
-  string single_price = 14;
-  int32 normalized_single_price = 15;
-  string set_price = 16;
-  int32 normalized_set_price = 17;
-  string beer_type = 18;
-  string needs_reservation = 19;
-  bool normalized_needs_reservation = 20;
-  string use_hachipay = 21;
-  bool normalized_use_hachipay = 22;
-  bool is_open_holiday = 23;
-  bool is_irregular_holiday = 24;
-  double latitude = 25;
-  double longitude = 26;
-  string distance = 27;
-  int32 week_number = 28;
-  int32 day_of_week = 29;
-  string start_time = 30;
-  string end_time = 31;
-  bool is_holiday = 32;
-  bool in_current_sales = 33;
-  bool is_stamped = 37;
-  int32 number_of_times = 38;
+  string image_url = 6;
+  string google_url = 7;
+  string tabelog_url = 8;
+  string official_url = 9;
+  string instagram_url = 10;
+  string address = 11;
+  string business_days = 12;
+  string regular_holiday = 13;
+  bool is_open_holiday = 14;
+  bool is_irregular_holiday = 15;
+  double latitude = 16;
+  double longitude = 17;
+  string distance = 18;
+  int32 week_number = 19;
+  int32 day_of_week = 20;
+  string start_time = 21;
+  string end_time = 22;
+  bool is_holiday = 23;
+  bool in_current_sales = 24;
+  bool is_stamped = 25;
+  int32 number_of_times = 26;
 }
 
 message ShopLocation {
